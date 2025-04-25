@@ -27,6 +27,9 @@
               <li><a href="{{ route('contact')}}">Contact</a></li>
               <li><a href="{{ route('blade')}}">Blade directives</a></li>
               <li><a href="{{ route('users')}}">users</a></li>
+              <li><a href="{{ route('mycontroller') }}">My First Controller</a></li>
+
+              
               
             </ul>
           </nav>

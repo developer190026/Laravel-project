@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\InvokableController;  // Correct capitalization
+
+Route::get('/invokeablecontrol', InvokableController::class);  // Correct capitalization
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
 function getusers() {
     return [
         ['name' => 'Bindu', 'email' => 'bindu@example.com', 'city' => 'Mohali'],
@@ -141,7 +147,7 @@ Route::get('/user/{id}', function ($id) {
     $allusers = getusers();
   $userid = $allusers[$id];
 
-  abort_if(!isset($allusers[$id]), 404);
+abort_if(!isset($allusers[$id]), 404);
    // return "<h2>User ID: {$id}</h2>";
 
     return view('pass-data-to-route.user', 
@@ -151,3 +157,22 @@ Route::get('/user/{id}', function ($id) {
 );
 
 })->name('user');
+
+
+// controller
+// Route::get('/testcontroller/',[PageController::class,'showWelcome'])->name('mycontroller');
+// Route::get('/testcontroller/{id}',[PageController::class,'showHome'])->name('testcontroller');
+// Route::get('/blog/',[PageController::class,'showBlog'])->name('blog');
+// Route::get('/nextblog/',[PageController::class,'showNextBlog'])->name('nextblog');
+
+Route::controller(PageController::class)->group(function(){
+
+    Route::get('/testcontroller','showWelcome')->name('mycontroller');
+    Route::get('/testcontroller/{id}','showHome')->name('testcontroller');
+    Route::get('/blog','showBlog')->name('blog');
+    Route::get('/nextblog','showNextBlog')->name('nextblog');
+    
+});
+
+
+
